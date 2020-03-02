@@ -17,17 +17,10 @@ steps:
 
 - task: PowerShell@2
   inputs:
-    filePath: 'AADGuestUser/ci/scripts/PSAnalyzer.ps1'
+    filePath: 'AADGuestUser/ci/scripts/Pester.ps1'
+    workingDirectory: 'AADGuestUser'
 - task: PowerShell@2
   inputs:
-    targetType: 'inline'
-    script: |
-      Install-Module -Name Pester -Scope CurrentUser -Force
-      $testResults =  Invoke-Pester -PassThru
-              if ($testResults.FailedCount -gt 0) {
-                  $testResults | Format-List
-                  Write-Error -Message 'One or more Pester tests failed. Build cannot continue!'
-              }
-    pwsh: true
-    workingDirectory: 'AADGuestUser'
+    filePath: 'AADGuestUser/ci/scripts/PSAnalyzer.ps1'
+
 
