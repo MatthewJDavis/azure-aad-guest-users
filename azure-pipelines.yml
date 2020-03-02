@@ -3,13 +3,22 @@
 # Add steps that build, run tests, deploy, and more:
 # https://aka.ms/yaml
 
-trigger:
-- master
-
 pool:
   vmImage: 'ubuntu-latest'
 
 steps:
+- task: PowerShell@2
+  inputs:
+    targetType: 'inline'
+    script: |
+      pwd
+      Get-ChildItem -Recurse
+    workingDirectory: 'AADGuestUser'
+
+- task: PowerShell@2
+  inputs:
+    filePath: 'ci/scripts/PSAnalyzer.ps1'
+    workingDirectory: 'AADGuestUser'
 - task: PowerShell@2
   inputs:
     targetType: 'inline'
@@ -22,3 +31,4 @@ steps:
               }
     pwsh: true
     workingDirectory: 'AADGuestUser'
+
