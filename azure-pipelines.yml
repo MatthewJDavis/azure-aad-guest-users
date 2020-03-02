@@ -14,8 +14,11 @@ steps:
   inputs:
     targetType: 'inline'
     script: |
-      # Write your PowerShell commands here.
       Install-Module -Name Pester -Scope CurrentUser -Force
-      Invoke-Pester
+      $testResults =  Invoke-Pester -PassThru
+              if ($testResults.FailedCount -gt 0) {
+                  $testResults | Format-List
+                  Write-Error -Message 'One or more Pester tests failed. Build cannot continue!'
+              }
     pwsh: true
     workingDirectory: 'AADGuestUser'
