@@ -8,19 +8,15 @@ pool:
 
 steps:
 - task: PowerShell@2
+  displayName: 'PSAnalyzer for scripts'
   inputs:
-    targetType: 'inline'
-    script: |
-      pwd
-      Get-ChildItem -Recurse
-    workingDirectory: 'AADGuestUser'
-
+    filePath: 'AADGuestUser/ci/scripts/PSAnalyzer.ps1'
+    workingDirectory: 'AADGuestUser/ci/scripts'
 - task: PowerShell@2
+  displayName: 'Run Pester Tests for Send script'
   inputs:
     filePath: 'AADGuestUser/ci/scripts/Pester.ps1'
     workingDirectory: 'AADGuestUser/ci/scripts'
-- task: PowerShell@2
-  inputs:
-    filePath: 'AADGuestUser/ci/scripts/PSAnalyzer.ps1'
+
 
 
