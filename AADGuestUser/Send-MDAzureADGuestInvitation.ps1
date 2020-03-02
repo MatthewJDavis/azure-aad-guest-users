@@ -64,12 +64,12 @@ foreach($user in $cleanUserList){
         try {
             $invite = New-AzureADMSInvitation -InvitedUserDisplayName $displayName -InvitedUserEmailAddress $user.email -SendInvitationMessage $true -InviteRedirectUrl $url
             Add-AzureADGroupMember -ObjectId $demoAppGroupID -RefObjectId $invite.InvitedUser.Id
-            Write-Output "$($invite.InvitedUserEmailAddress) invited on $date. Added to demoApp AAD group." 
+            Write-Output "$($invite.InvitedUserEmailAddress) invited on $date. Added to demoApp AAD group."
             $inviteCounter ++
         }
         catch
         {
-            Write-Output "Failed to send invite: $_.Exception.Message `n Failed to send invite to: $($user.email)" 
+            Write-Output "Failed to send invite: $_.Exception.Message `n Failed to send invite to: $($user.email)"
         }
     }
 }
