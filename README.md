@@ -24,6 +24,10 @@ Test can be run via Invoke-Pester.
 
 Blog post on [sending invites].
 
+### Diagram
+
+![Diagram overview of solution](https://matthewdavis111.com/images/azuread-guest-invite/diagram.png)
+
 
 [Azure b2b feature]: https://docs.microsoft.com/en-us/azure/active-directory/b2b/what-is-b2b
 [sending invites]: https://matthewdavis111.com/azure/automating-azure-ad-guest-invites/
