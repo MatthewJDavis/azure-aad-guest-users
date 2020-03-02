@@ -12,8 +12,8 @@ steps:
     targetType: 'inline'
     script: |
       pwd
-      Get-ChildItem
-    workingDirectory: 'AADGuestUser' -Recurse
+      Get-ChildItem -Recurse
+    workingDirectory: 'AADGuestUser'
 
 - task: PowerShell@2
   inputs:
