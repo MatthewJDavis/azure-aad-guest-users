@@ -13,6 +13,7 @@ steps:
     script: |
       pwd
       Get-ChildItem
+      workingDirectory: 'AADGuestUser' -Recurse
 
 - task: PowerShell@2
   inputs:
