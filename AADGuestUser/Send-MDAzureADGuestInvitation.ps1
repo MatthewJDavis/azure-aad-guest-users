@@ -18,7 +18,6 @@ $csvPath = "$env:tmp\test.csv"
 $inviteCounter = 0
 $csvUri = Get-AutomationVariable -Name 'demoApp-storage-sas'
 $creds = Get-AutomationPSCredential -Name 'demoApp-invite-user'
-$slackUri = Get-AutomationVariable -Name 'demoAppSlackWebHookUri'
 
 try {
     Connect-AzureAD -Credential $creds | Out-Null
