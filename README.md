@@ -1,7 +1,7 @@
 # azure-aad-guest-users
 Automation of guest users in Azure
 
-[![Build Status](https://matthewjdavis111.visualstudio.com/azure-aad-guest-users/_apis/build/status/azure-aad-guest-users?branchName=master)](https://matthewjdavis111.visualstudio.com/azure-aad-guest-users/_build/latest?definitionId=16&branchName=master)
+[![Build Status](https://matthewjdavis111.visualstudio.com/azure-aad-guest-users/_apis/build/status/MatthewJDavis.azure-aad-guest-users?branchName=master)](https://matthewjdavis111.visualstudio.com/azure-aad-guest-users/_build/latest?definitionId=17&branchName=master)
 
 ## Overview
 
