@@ -79,7 +79,7 @@ Describe "No users found in Azure AD with same email address" {
 
     }
     It "Invite count is 1" {
-        $result[1] | Should -eq "1 new external user(s) invited to Azure AD to access Azure AD application."
+        $result[2] | Should -eq "1 new external user(s) invited to Azure AD to access demoApp."
     }
 }
 Describe "Two users exist in AzureAD, one needs to be invited" {
@@ -106,7 +106,7 @@ Describe "Two users exist in AzureAD, one needs to be invited" {
     } 
 
     It "Invite count is 1" {
-        $result[3] | Should -eq "1 new external user(s) invited to Azure AD to access Azure AD application."
+        $result[3] | Should -eq "1 new external user(s) invited to Azure AD to access demoApp."
     }
 
 }
@@ -133,6 +133,6 @@ Describe "Two users needs to be invited" {
 
     $result = . "$here\$sut"
     It "Invite count is 2" {
-        $result[3] | Should -eq "2 new external user(s) invited to Azure AD to access Azure AD application."
+        $result[3] | Should -eq "2 new external user(s) invited to Azure AD to access demoApp."
     }
 }
