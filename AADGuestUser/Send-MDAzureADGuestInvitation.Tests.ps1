@@ -10,8 +10,6 @@ function Get-AutomationVariable {}
 function Connect-AzureAD {}
 function Disconnect-AzureAD { }
 
-function New-MDSlackMessage {}
-
 Mock -CommandName 'Import-Module' -MockWith{}
 
 Mock -CommandName 'Get-AutomationVariable' -MockWith{
@@ -47,10 +45,6 @@ Describe "Users already existing in Azure AD" {
         $mockAzureADUser[0]
     }
 
-    Mock -CommandName New-MDSlackMessage -MockWith {
-        $true
-    }
-
     $result = . "$here\$sut"
     
     It "Finds an existing guest user and does not send an invite" {
@@ -67,9 +61,6 @@ Describe "No users found in Azure AD with same email address" {
         $null
     }
     
-    Mock -CommandName New-MDSlackMessage -MockWith {
-        $true
-    }
 
     $result = . "$here\$sut"
     
@@ -89,10 +80,6 @@ Describe "Two users exist in AzureAD, one needs to be invited" {
     
     Mock -CommandName 'Get-AzureADUser' -MockWith {
         $mockAzureADUser[0]
-    }
-
-    Mock -CommandName New-MDSlackMessage -MockWith {
-        $true
     }
     
     $result = . "$here\$sut"
@@ -125,10 +112,6 @@ Describe "Two users needs to be invited" {
     }
     Mock -CommandName 'Get-AzureADUser' -MockWith {
         $null
-    }
-
-    Mock -CommandName New-MDSlackMessage -MockWith {
-        $true
     }
 
     $result = . "$here\$sut"

@@ -5,7 +5,6 @@
     Users to be provided in CSV file with the headings 'username,email'.
     Users will be be checked to see if they have been invited to Azure AD as a guest user previously. If there is already an invite, then no action will be take, if a user doesn't exist in Azure AD, then an invite will be sent.
     Output will be logged to the job output in Azure.
-    A message will be posted to the slack room advising on the number of users invited.
 .NOTES
     https://docs.microsoft.com/en-us/azure/active-directory/b2b/b2b-quickstart-invite-powershell
 #>
@@ -28,26 +27,6 @@ try {
 catch {
     throw "Failed to connect to AzureAD: $_.Exception.Message"
 }
-
-#region Slack helper function
-function New-MDSlackMessage {
-    param(
-        # URI of Slack Hook
-        [Parameter(Mandatory = $true, Position = 0)]
-        [string]
-        $Uri,
-        # Message To Send
-        [Parameter(Mandatory = $true, Position = 1)]
-        [string]
-        $Message
-    )
-    $payload = @{
-        "text" = $Message
-    }
-
-    Invoke-RestMethod -Method Post -Uri $Uri -Body (ConvertTo-Json -InputObject $payload -Compress) -UseBasicParsing | Out-Null
-}
-#endregion
 
 #region get csv file
 try {
@@ -92,14 +71,12 @@ foreach($user in $cleanUserList){
         catch
         {
             Write-Output "Failed to send invite: $_.Exception.Message `n Failed to send invite to: $($user.email)" 
-            New-MDSlackMessage -Uri $slackUri -Message "$_.Exception.Message `n Failed to send invite to: $($user.email)"
         }
     }
 }
 
 $message =  "$($inviteCounter) new external user(s) invited to Azure AD to access demoApp."
 Write-Output $message
-New-MDSlackMessage -Uri $slackUri -Message $message
 
 Disconnect-AzureAD
 Write-Output 'Finished runbook and disconnected from AzureAD'
