@@ -8,15 +8,10 @@ pool:
 
 steps:
 - task: PowerShell@2
-  displayName: 'PSAnalyzer for scripts'
   inputs:
-    filePath: 'AADGuestUser/ci/scripts/PSAnalyzer.ps1'
-    workingDirectory: 'AADGuestUser/ci/scripts'
-- task: PowerShell@2
-  displayName: 'Run Pester Tests for Send script'
-  inputs:
-    filePath: 'AADGuestUser/ci/scripts/Pester.ps1'
-    workingDirectory: 'AADGuestUser/ci/scripts'
+    filePath: 'build.ps1'
+    arguments: 'Default'
+  displayName: 'Run psake Analyse and test'
 
 
 
