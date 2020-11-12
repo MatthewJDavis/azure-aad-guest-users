@@ -8,10 +8,10 @@ jobs:
     steps:
     - name: Check out repository code
       uses: actions/checkout@v2
-    - name: Print working dir
+    - name: output
       shell: pwsh
-      run: pwd
+      run: ls
     - name: Perform a Pester test from the Tests.ps1 file
       shell: pwsh
       run: |
-        build.ps1
+        ./build.ps1
