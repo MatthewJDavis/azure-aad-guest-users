@@ -5,8 +5,13 @@ param(
     $Task = 'default'
 )
 
+$pesterVersion = '5.0.4'
 
-if (!(Get-Module -Name Pester -ListAvailable)) { Install-Module -Name Pester -RequiredVersion 4.10.1 -Scope CurrentUser -Force }
+if (!(Get-Module -Name Pester -ListAvailable).Version.ToString() -ne $pesterVersion) { 
+    Install-Module -Name Pester -RequiredVersion $pesterVersion -Scope CurrentUser -Force
+    Remove-Module -Name 'Pester' -Force
+    Import-Module -Name 'Pester' -RequiredVersion $pesterVersion -Force
+}
 if (!(Get-Module -Name psake -ListAvailable)) { Install-Module -Name psake -Scope CurrentUser -Force }
 if (!(Get-Module -Name PSScriptAnalyzer -ListAvailable)) { Install-Module -Name PSScriptAnalyzer -Scope CurrentUser -Force }
 
