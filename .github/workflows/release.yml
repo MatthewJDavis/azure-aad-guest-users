@@ -7,8 +7,6 @@ name: Tag and release
 on:
   push:
     branches: [ master ]
-  pull_request:
-    branches: [ master ]
     
 jobs:
   pester-test:
