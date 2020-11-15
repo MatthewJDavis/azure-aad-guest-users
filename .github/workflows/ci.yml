@@ -3,6 +3,7 @@ name: Test and run PSScriptAnalyzer
 on:
   push:
     branches:
+      - '*'
       - '!master'
 
 jobs:
