@@ -11,7 +11,8 @@ on:
       - MatthewJDavis-patch-1
   pull_request:
     branches: [ master ]
-
+    
+jobs:
   release:
     name: Create Release
     runs-on: ubuntu-latest
