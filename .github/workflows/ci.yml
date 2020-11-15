@@ -2,7 +2,8 @@
 name: Send-MDAzureADGuestInvitation Test and run PSScriptAnalyzer
 on:
   push:
-    branches: [ '!master' ]
+    branches:
+      - '!master'
 
 jobs:
   pester-test:
