@@ -1,6 +1,5 @@
 BeforeAll {
-    $sut = 'Send-MDAzureADGuestInvitation.ps1'
-    $here = $PSScriptRoot
+    $sut = $PSScriptRoot + '\Send-MDAzureADGuestInvitation.ps1'
     # Create empty functions for cmdlets not on system to be mocked later
     function New-AzureADMSInvitation { }
     function Add-AzureADGroupMember { }
@@ -40,7 +39,7 @@ Describe "Users already existing in Azure AD" {
         Mock -CommandName 'Get-AzureADUser' -MockWith {
             $mockAzureADUser[0]
         }
-        $result = . "$here\$sut"
+        $result = . $sut
     }
     It "Finds an existing guest user and does not send an invite" {
         $result[1] | Should -BeLike "User with email address already has been invited*"
@@ -54,7 +53,7 @@ Describe "No users found in Azure AD with same email address" {
         Mock -CommandName 'Get-AzureADUser' -MockWith {
             $null
         }
-        $result = . "$here\$sut"
+        $result = . $sut
     }
     It "Invites a new user" {
         $result[1] | Should -BeLike "*invited on*"
@@ -69,19 +68,17 @@ Describe "Two users exist in AzureAD, one needs to be invited" {
         Mock -CommandName 'Import-Csv' -MockWith {
             $mockCsv
         }
-    
         Mock -CommandName 'Get-AzureADUser' -MockWith {
             $mockAzureADUser[0]
         }
-    
-        $result = . "$here\$sut"
+        $result = . $sut
     }
     It "Finds an existing guest user and does not send an invite" {
         $result[1] | Should -Belike  "User with email address already has been invited*"
     }
     It "Invites a new user" {
         $result[2] | Should -BeLike "*invited on*"
-    } 
+    }
     It "Invite count is 1" {
         $result[3] | Should -eq "1 new external user(s) invited to Azure AD to access demoApp."
     }
@@ -103,7 +100,7 @@ Describe "Two users needs to be invited" {
         Mock -CommandName 'Get-AzureADUser' -MockWith {
             $null
         }
-        $result = . "$here\$sut"
+        $result = . $sut
     }
     It "Invite count is 2" {
         $result[3] | Should -eq "2 new external user(s) invited to Azure AD to access demoApp."
