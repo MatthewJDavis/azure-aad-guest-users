@@ -6,7 +6,9 @@ name: Tag and release
 # events but only for the master branch
 on:
   push:
-    branches: [ master ]
+    branches: 
+      - master
+      - MatthewJDavis-patch-1
   pull_request:
     branches: [ master ]
 
