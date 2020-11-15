@@ -1,5 +1,5 @@
 ---
-name: Send-MDAzureADGuestInvitation Test and run PSScriptAnalyzer
+name: Test and run PSScriptAnalyzer
 on:
   push:
     branches:
