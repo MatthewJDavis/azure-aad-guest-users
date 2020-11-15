@@ -7,7 +7,7 @@ param(
 
 $pesterVersion = '5.0.4'
 
-if (!(Get-Module -Name Pester -ListAvailable).Version.ToString() -ne $pesterVersion) { 
+if ((Get-Module -Name Pester -ListAvailable).Version.ToString() -ne $pesterVersion) { 
     Install-Module -Name Pester -RequiredVersion $pesterVersion -Scope CurrentUser -Force
     Remove-Module -Name 'Pester' -Force
     Import-Module -Name 'Pester' -RequiredVersion $pesterVersion -Force
