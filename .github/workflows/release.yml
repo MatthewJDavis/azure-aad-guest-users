@@ -1,6 +1,10 @@
 ---
-name: Send-MDAzureADGuestInvitation Test and run PSScriptAnalyzer
-on: push
+name: Master Workflow - Build and deploy to production
+on:
+  pull_request:
+    types: closed
+    branches:
+      - master
 
 jobs:
   pester-test:
@@ -14,11 +18,11 @@ jobs:
       run: |
         ./build.ps1
 
-  release:
+      build:
     name: Create Release
     runs-on: ubuntu-latest
     steps:
-      - name: Check out repository code
+      - name: Checkout code
         uses: actions/checkout@v2
       - name: Create Release
         id: create_release
